@@ -62,6 +62,7 @@ namespace TodoList
         private static void InjectServices(ref ServiceCollection services)
         {
             services.AddSingleton<INavigationService, NavigationService>();
+            services.AddSingleton<IFileService, FileService>();
         }
     }
 }

@@ -9,20 +9,20 @@
       Background="#55BBFF"
       Title="HomeView">
 
-    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-        <Label Content="To-Do List" FontSize="48" Foreground="#222222" HorizontalAlignment="Center"/>
-        <Label Content="de Rodrigue MULLIER" FontSize="20" HorizontalAlignment="Center" Foreground="#222222" Margin="0,0,0,50" />
-        <Button Content="Accéder aux tâches" 
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Label Content="To-Do List" FontSize="48" Foreground="#222222" HorizontalAlignment="Center"/>
+            <Label Content="de Rodrigue MULLIER" FontSize="20" HorizontalAlignment="Center" Foreground="#222222" Margin="0,0,0,50" />
+            <Button Content="Accéder aux tâches" 
                 Background="#0055FF" 
                 Foreground="White" 
                 Height="32" Width="250" 
                 BorderBrush="#0022FF" 
                 Command="{Binding NavigateToTasksCommand}">
-            <Button.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="8"/>
-                </Style>
-            </Button.Resources>
-        </Button>
-    </StackPanel>
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="8"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+        </StackPanel>
 </Page>

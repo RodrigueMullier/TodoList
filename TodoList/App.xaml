@@ -5,7 +5,7 @@
              xmlns:viewModel="clr-namespace:TodoList.ViewModels"
              xmlns:view="clr-namespace:TodoList.Views">
     <Application.Resources>
-
+        
         <DataTemplate DataType="{x:Type TypeName=viewModel:HomeViewModel}">
             <view:HomeView />
         </DataTemplate>

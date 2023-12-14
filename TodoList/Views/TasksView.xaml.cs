@@ -12,13 +12,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TodoList.ViewModels;
 
 namespace TodoList.Views
 {
     /// <summary>
     /// Logique d'interaction pour TasksView.xaml
     /// </summary>
-    public partial class TasksView : Page
+    public partial class TasksView : BasePage
     {
         public TasksView()
         {
