@@ -5,42 +5,58 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:TodoList.Views"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="450" 
+      d:DesignWidth="800"
+      Background="{StaticResource BackgroundColor}"
       Loaded="Page_Loaded"
-      Background="#CCCCCC">
+      Title="Liste des tâches">
 
-    <StackPanel>
-
-        <Button
-            Margin="0,20,0,20"
-            Content="Ajouter une tache" 
-    Background="#0055FF" 
-    Foreground="White" 
-    Height="32" Width="250" 
-    BorderBrush="#0022FF" 
-    Command="{Binding NavigateToAddTaskCommand}">
-            <Button.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="8"/>
-                </Style>
-            </Button.Resources>
-        </Button>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="64"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
         
-        <ListView ItemsSource="{Binding Items}">
+        <Button Grid.Row="0"
+            Content="Ajouter une tâche" 
+            Width="250" 
+            Style="{StaticResource DefaultButton}"
+            Command="{Binding NavigateToAddTaskCommand}" />
 
-        <ListView.View>
+        <ScrollViewer Grid.Row="1">
+            <ItemsControl ItemsSource="{Binding Items}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Margin="8" CornerRadius="4" Background="White">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
 
-            <GridView AllowsColumnReorder="true" ColumnHeaderToolTip="Employee Information">
+                                <StackPanel Grid.Column="0" Orientation="Vertical" Margin="8" VerticalAlignment="Stretch">
+                                    <TextBlock Text="{Binding Title}" TextWrapping="Wrap" FontWeight="Bold" />
+                                    <TextBlock Text="{Binding Description}" TextWrapping="Wrap" />
+                                </StackPanel>
 
-                <GridViewColumn DisplayMemberBinding="{Binding Path=Id}" Header="Id" Width="100"/>
-                <GridViewColumn DisplayMemberBinding="{Binding Path=Title}" Header="Title" Width="100"/>
-
-                <GridViewColumn DisplayMemberBinding="{Binding Path=Description}"  Header="Description" Width="100" />
-                <GridViewColumn DisplayMemberBinding="{Binding Path=Status}"  Header="Status" Width="100" />
-            </GridView>
-
-        </ListView.View>
-    </ListView>
-    
-    </StackPanel>
+                                <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="8">
+                                    <Label Content="Terminée" Visibility="{Binding IsFinished, Converter={StaticResource boolToVisibilityConverter}}" />
+                                    <Button Content="Marqué comme terminé" 
+                                            Style="{StaticResource SuccessButton}"
+                                            Visibility="{Binding IsFinished, Converter={StaticResource boolToVisibilityConverter}, ConverterParameter=Inverse}" 
+                                            Command="{Binding DataContext.MarkAsFinishedCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:TasksView}}"  
+                                            CommandParameter="{Binding Id}"
+                                            />
+                                    <Separator Width="12" Background="Transparent"/>
+                                    <Button Content="Modifier" Style="{StaticResource UpdateButton}" />
+                                    <Separator Width="12" Background="Transparent"/>
+                                    <Button Content="Supprimer" Style="{StaticResource ErrorButton}" />
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </Grid>
 </local:BasePage>

@@ -7,16 +7,17 @@ using System.Text;
 using System.Threading.Tasks;
 using TodoList.Models;
 using TodoList.Services.Interfaces;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace TodoList.Services
 {
     public class FileService : IFileService
     {
-        public async Task<T> ReadFile<T>(string filePath) where T : class
+        public async Task<T> ReadFile<T>(string relativePath) where T : class
         {
             try
             {
-                string jsonContent = await ReadFileAsync(filePath);
+                string jsonContent = await ReadFileAsync(GetAbsolutePath(relativePath));
 
                 return JsonConvert.DeserializeObject<T>(jsonContent)!;
             }
@@ -25,10 +26,9 @@ namespace TodoList.Services
                 throw new Exception(ex.Message);
             }
         }
-
-        private async Task<string> ReadFileAsync(string filePath)
+        private async Task<string> ReadFileAsync(string absolutePath)
         {
-            using FileStream sourceStream = new(filePath, FileMode.Open, FileAccess.Read, FileShare.Read, bufferSize: 4096, useAsync: true);
+            using FileStream sourceStream = new(absolutePath, FileMode.Open, FileAccess.Read, FileShare.Read, bufferSize: 4096, useAsync: true);
             StringBuilder sb = new();
 
             byte[] buffer = new byte[0x1000];
@@ -40,6 +40,38 @@ namespace TodoList.Services
             }
 
             return sb.ToString();
+        }
+        public async Task<bool> WriteFile(string relativePath, string content)
+        {
+            try
+            {
+                await WriteTextAsync(GetAbsolutePath(relativePath), content);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+        private async Task WriteTextAsync(string absolutePath, string text)
+        {
+            byte[] encodedText = Encoding.UTF8.GetBytes(text);
+
+            using var sourceStream =
+                new FileStream(
+                    absolutePath,
+                    FileMode.Create, FileAccess.Write, FileShare.None,
+                    bufferSize: 4096, useAsync: true);
+
+            await sourceStream.WriteAsync(encodedText, 0, encodedText.Length);
+        }
+
+        private string GetAbsolutePath(string relativePath)
+        {
+            string relativePathWithPrefix = @"..\..\..\" + relativePath;
+            string currentDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            string fullPath = Path.Combine(currentDirectory, relativePathWithPrefix);
+            return Path.GetFullPath(fullPath);
         }
     }
 }

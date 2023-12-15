@@ -6,10 +6,22 @@
       xmlns:local="clr-namespace:TodoList.Views"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Background="#6688FF"
-      Title="AddTaskView">
+      Background="{StaticResource BackgroundColor}"
+      Title="Ajouter une tâche">
 
-    <Grid>
-        
-    </Grid>
+    <StackPanel Margin="20">
+        <Button HorizontalAlignment="Left" Content="Retour aux tâches" Style="{StaticResource DefaultButton}" Command="{Binding NavigateToTasksCommand}" />
+
+        <TextBox Width="200" Text="{Binding Title}" Margin="0,0,0,10" />
+        <TextBox
+            Width="300"
+            x:Name="tbMultiLine"
+            TextWrapping="Wrap"
+            AcceptsReturn="True"
+            VerticalScrollBarVisibility="Visible"
+            Text="{Binding Description}" />
+
+        <Separator Height="20" Background="Transparent"/>
+        <Button Width="250" Content="Ajoute une tâche"  Style="{StaticResource SuccessButton}" Command="{Binding AddTaskCommand}" />
+    </StackPanel>
 </Page>

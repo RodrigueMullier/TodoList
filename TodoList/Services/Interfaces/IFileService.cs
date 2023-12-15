@@ -8,6 +8,7 @@ namespace TodoList.Services.Interfaces
 {
     public interface IFileService
     {
-        Task<T> ReadFile<T>(string filePath) where T : class;
+        Task<T> ReadFile<T>(string relativePath) where T : class;
+        Task<bool> WriteFile(string relativePath, string content);
     }
 }
