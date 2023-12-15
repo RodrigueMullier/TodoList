@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using TodoList.Models;
 using TodoList.Services;
 using TodoList.Services.Interfaces;
+using TodoList.Utils;
 
 namespace TodoList.ViewModels
 {
@@ -29,7 +30,7 @@ namespace TodoList.ViewModels
         {
             try
             {
-                List<Item> items = await _fileService.ReadFile<List<Item>>("/Resources/Data/tasks.json");
+                List<Item> items = await _fileService.ReadFile<List<Item>>(Constants.DATA_PATH);
                 items.Add(new Item()
                 {
                     Id = items.OrderByDescending(x => x.Id).Select(x => x.Id).First() + 1,
@@ -37,7 +38,7 @@ namespace TodoList.ViewModels
                     Description = Description,
                 });
 
-                bool result = await _fileService.WriteFile("/Resources/Data/tasks.json", JsonConvert.SerializeObject(items));
+                bool result = await _fileService.WriteFile(Constants.DATA_PATH, JsonConvert.SerializeObject(items));
 
                 if(result)
                 {
