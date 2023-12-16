@@ -11,7 +11,7 @@ namespace TodoList.ViewModels
     public class HomeViewModel : BaseViewModel
     {
         public RelayCommand NavigateToTasksCommand { get; set; }
-        public HomeViewModel(INavigationService navigationService) : base(navigationService)
+        public HomeViewModel(ISession session, INavigationService navigationService) : base(session, navigationService)
         {
             NavigateToTasksCommand = new RelayCommand(NavigationService.NavigateTo<TasksViewModel>);
         }

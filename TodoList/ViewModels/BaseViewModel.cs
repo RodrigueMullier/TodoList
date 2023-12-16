@@ -10,9 +10,11 @@ using TodoList.Services.Interfaces;
 
 namespace TodoList.ViewModels
 {
-    public abstract class BaseViewModel(INavigationService navigationService) : INotifyPropertyChanged
+    public abstract class BaseViewModel(ISession session, INavigationService navigationService) : INotifyPropertyChanged
     {
         public INavigationService NavigationService { get; set; } = navigationService;
+        public ISession Session { get; set; } = session;
+
         public event PropertyChangedEventHandler? PropertyChanged;
         public bool IsLoading { get; set; }
 
@@ -29,7 +31,7 @@ namespace TodoList.ViewModels
                 using CancellationTokenSource cts = new(10000);
                 await OnPageLoaded(cts.Token);
             }
-            catch(Exception ex)
+            catch(Exception)
             {
                 
             }
@@ -41,6 +43,8 @@ namespace TodoList.ViewModels
         protected void OnPropertyChanged(string? propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        } 
+        }
+
+        public virtual void CleanUp() { }
     }
 }

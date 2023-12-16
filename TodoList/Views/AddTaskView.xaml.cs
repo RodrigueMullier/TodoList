@@ -18,7 +18,7 @@ namespace TodoList.Views
     /// <summary>
     /// Logique d'interaction pour AddTaskView.xaml
     /// </summary>
-    public partial class AddTaskView : Page
+    public partial class AddTaskView : BasePage
     {
         public AddTaskView()
         {

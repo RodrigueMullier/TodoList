@@ -39,8 +39,8 @@ namespace TodoList
         {
             ServiceCollection services = new();
 
-            InjectViewModels(ref services);
             InjectServices(ref services);
+            InjectViewModels(ref services);
 
             services.AddSingleton<Func<Type, BaseViewModel>>(s => viewModelType => (BaseViewModel)s.GetRequiredService(viewModelType));
             services.AddSingleton(s => new MainWindow
@@ -63,6 +63,7 @@ namespace TodoList
         {
             services.AddSingleton<INavigationService, NavigationService>();
             services.AddSingleton<IFileService, FileService>();
+            services.AddSingleton<ISession, Session>();
         }
     }
 }

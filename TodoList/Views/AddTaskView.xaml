@@ -1,4 +1,4 @@
-﻿<Page x:Class="TodoList.Views.AddTaskView"
+﻿<local:BasePage x:Class="TodoList.Views.AddTaskView"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -22,6 +22,6 @@
             Text="{Binding Description}" />
 
         <Separator Height="20" Background="Transparent"/>
-        <Button Width="250" Content="Ajoute une tâche"  Style="{StaticResource SuccessButton}" Command="{Binding AddTaskCommand}" />
+        <Button Width="250" Content="{Binding SubmitText}"  Style="{StaticResource SuccessButton}" Command="{Binding SubmitTaskCommand}" />
     </StackPanel>
-</Page>
+</local:BasePage>

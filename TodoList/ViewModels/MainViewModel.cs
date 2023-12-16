@@ -11,7 +11,7 @@ namespace TodoList.ViewModels
 {
     public class MainViewModel : BaseViewModel
     {
-        public MainViewModel(INavigationService navigationService) : base(navigationService)
+        public MainViewModel(ISession session, INavigationService navigationService) : base(session, navigationService)
         {
             NavigationService.NavigateTo<HomeViewModel>();
         }

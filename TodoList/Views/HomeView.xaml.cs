@@ -19,7 +19,7 @@ namespace TodoList.Views
     /// <summary>
     /// Logique d'interaction pour HomeView.xaml
     /// </summary>
-    public partial class HomeView : Page
+    public partial class HomeView : BasePage
     {
         public HomeView()
         {

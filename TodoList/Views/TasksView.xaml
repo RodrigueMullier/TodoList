@@ -8,7 +8,6 @@
       d:DesignHeight="450" 
       d:DesignWidth="800"
       Background="{StaticResource BackgroundColor}"
-      Loaded="Page_Loaded"
       Title="Liste des tâches">
 
     <Grid>
@@ -45,10 +44,12 @@
                                             Style="{StaticResource SuccessButton}"
                                             Visibility="{Binding IsFinished, Converter={StaticResource boolToVisibilityConverter}, ConverterParameter=Inverse}" 
                                             Command="{Binding DataContext.MarkAsFinishedCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:TasksView}}"  
-                                            CommandParameter="{Binding Id}"
-                                            />
+                                            CommandParameter="{Binding Id}" />
                                     <Separator Width="12" Background="Transparent"/>
-                                    <Button Content="Modifier" Style="{StaticResource UpdateButton}" />
+                                    <Button Content="Modifier" 
+                                            Style="{StaticResource UpdateButton}" 
+                                            Command="{Binding DataContext.UpdateItemCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:TasksView}}"  
+                                            CommandParameter="{Binding Id}" />
                                     <Separator Width="12" Background="Transparent"/>
                                     <Button Content="Supprimer" 
                                             Style="{StaticResource ErrorButton}" 
