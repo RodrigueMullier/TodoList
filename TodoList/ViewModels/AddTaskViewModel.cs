@@ -87,10 +87,6 @@ namespace TodoList.ViewModels
             {
                 Console.WriteLine($"Erreur lors du chargement des données : {ex.Message}");
             }
-
-
-            Console.WriteLine(Title);
-            Console.WriteLine(Description);
         }
 
         private void ClearInputs()
