@@ -4,29 +4,39 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:TodoList.Views"
+      xmlns:uc="clr-namespace:TodoList.Views.UserControls"
       mc:Ignorable="d" 
       d:DesignHeight="450" 
       d:DesignWidth="800"
       Background="{StaticResource BackgroundColor}"
       Title="Liste des tâches">
 
-    <Grid>
+    <Grid Margin="12">
         <Grid.RowDefinitions>
             <RowDefinition Height="64"/>
+            <RowDefinition Height="100"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         
-        <Button Grid.Row="0"
+        <Button 
+            Grid.Row="0"
+            HorizontalAlignment="Right"
             Content="Ajouter une tâche" 
             Width="250" 
             Style="{StaticResource DefaultButton}"
             Command="{Binding NavigateToAddTaskCommand}" />
 
-        <ScrollViewer Grid.Row="1">
-            <ItemsControl ItemsSource="{Binding Items}">
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center">
+            <Label Content="Filtrer" Style="{StaticResource SubTitleLabel}" HorizontalAlignment="Center" />
+            <uc:CategoryUserControl Categories="{Binding Categories}" Command="{Binding FilterCommand}" />
+        </StackPanel>
+       
+
+        <ScrollViewer Grid.Row="2">
+            <ItemsControl ItemsSource="{Binding DisplayedItems}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Border Margin="8" CornerRadius="4" Background="White">
+                        <Border CornerRadius="4" Background="White" Margin="8">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
@@ -36,13 +46,30 @@
                                 <StackPanel Grid.Column="0" Orientation="Vertical" Margin="8" VerticalAlignment="Stretch">
                                     <TextBlock Text="{Binding Title}" TextWrapping="Wrap" FontWeight="Bold" />
                                     <TextBlock Text="{Binding Description}" TextWrapping="Wrap" />
-                                </StackPanel>
+                                    <Separator Background="Transparent" />
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="80" />
+                                            <ColumnDefinition Width="80" />
+                                            <ColumnDefinition Width="80" />
+                                            <ColumnDefinition Width="80" />
+                                            <ColumnDefinition Width="80" />
+                                            <ColumnDefinition Width="80" />
+                                        </Grid.ColumnDefinitions>
 
-                                <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="8">
-                                    <Label Content="Terminée" Visibility="{Binding IsFinished, Converter={StaticResource boolToVisibilityConverter}}" />
+                                        <TextBlock 
+                                            Grid.Column="{Binding Category, Converter={StaticResource ItemCategoryToIntConverter}}"
+                                            Text="{Binding Category}" 
+                                            FontWeight="Bold"
+                                            Foreground="{Binding Category, Converter={StaticResource CategoryToBrushConverter}}" />
+                                    </Grid>
+                                </StackPanel>
+                                
+                                <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="8">
+                                    <Label Content="Terminée" Visibility="{Binding IsFinished, Converter={StaticResource BoolToVisibilityConverter}}" />
                                     <Button Content="Marqué comme terminé" 
                                             Style="{StaticResource SuccessButton}"
-                                            Visibility="{Binding IsFinished, Converter={StaticResource boolToVisibilityConverter}, ConverterParameter=Inverse}" 
+                                            Visibility="{Binding IsFinished, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=Inverse}" 
                                             Command="{Binding DataContext.MarkAsFinishedCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:TasksView}}"  
                                             CommandParameter="{Binding Id}" />
                                     <Separator Width="12" Background="Transparent"/>

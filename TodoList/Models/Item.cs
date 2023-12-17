@@ -14,6 +14,11 @@ namespace TodoList.Models
 
         [JsonConverter(typeof(StringEnumConverter))]
         public ItemStatus Status { get; set; } = ItemStatus.Default;
+
+        [JsonConverter(typeof(StringEnumConverter))]
+        public ItemCategory Category { get; set; }
+
+        [JsonIgnore]
         public bool IsFinished => Status == ItemStatus.Finished;
         public void MarkAsFinished()
         {
