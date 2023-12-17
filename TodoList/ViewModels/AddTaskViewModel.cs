@@ -1,15 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.Input;
-using CommunityToolkit.Mvvm.Messaging;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TodoList.Models;
-using TodoList.Services;
 using TodoList.Services.Interfaces;
 using TodoList.Utils;
 using TodoList.Utils.Enums;
