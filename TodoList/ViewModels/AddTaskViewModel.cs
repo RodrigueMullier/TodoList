@@ -21,6 +21,7 @@ namespace TodoList.ViewModels
         public AsyncRelayCommand SubmitTaskCommand { get; set; }
         public RelayCommand<ItemCategory> SetCategoryCommand { get; set; }
         public bool IsSubmitEnabled { get; set; }
+        public string ConfirmLabelValidation { get; set; } = "";
         public AddTaskViewModel(ISession session, INavigationService navigationService, IFileService fileService) : base(session, navigationService)
         {
             _fileService = fileService;
@@ -82,6 +83,7 @@ namespace TodoList.ViewModels
         /// </summary>
         private void SetIsSubmitEnabled()
         {
+            ConfirmLabelValidation = "";
             IsSubmitEnabled = Title.Length > 0 && Description.Length > 0 && _selectedCategory != null;
         }
 
@@ -121,6 +123,7 @@ namespace TodoList.ViewModels
                 if(result)
                 {
                     ClearInputs();
+                    ConfirmLabelValidation = Session.SelectedItem == null ? "Tâche ajoutée avec succés" : "Tâche modifiée avec succés";
                 }
             }
             catch (Exception ex)

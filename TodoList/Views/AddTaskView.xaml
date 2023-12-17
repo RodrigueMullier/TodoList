@@ -58,6 +58,12 @@
                 Content="{Binding SubmitText}" 
                 Style="{StaticResource SuccessButton}" 
                 Command="{Binding SubmitTaskCommand}" />
+            <Separator Height="20" Background="Transparent"/>
+            <Label 
+                Content="{Binding ConfirmLabelValidation}"
+                Style="{StaticResource SubTitleLabel}"
+                Foreground="DarkGreen"
+                HorizontalAlignment="Center" />
         </StackPanel>
     </StackPanel>
 </local:BasePage>

@@ -64,14 +64,20 @@
                                             Foreground="{Binding Category, Converter={StaticResource CategoryToBrushConverter}}" />
                                     </Grid>
                                 </StackPanel>
-                                
+
                                 <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="8">
-                                    <Label Content="Terminée" Visibility="{Binding IsFinished, Converter={StaticResource BoolToVisibilityConverter}}" />
-                                    <Button Content="Marqué comme terminé" 
-                                            Style="{StaticResource SuccessButton}"
-                                            Visibility="{Binding IsFinished, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=Inverse}" 
+                                    <Button Content="Marquer comme terminé" 
+                                            Width="160"
+                                            Style="{StaticResource SuccessButton}" 
                                             Command="{Binding DataContext.MarkAsFinishedCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:TasksView}}"  
-                                            CommandParameter="{Binding Id}" />
+                                            CommandParameter="{Binding Id}" 
+                                            Visibility="{Binding IsFinished, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=Inverse}"/>
+
+                                    <Button Content="Terminé" 
+                                            Width="160"
+                                            Style="{StaticResource FinishedButton}"
+                                            Visibility="{Binding IsFinished, Converter={StaticResource BoolToVisibilityConverter}}"/>
+
                                     <Separator Width="12" Background="Transparent"/>
                                     <Button Content="Modifier" 
                                             Style="{StaticResource UpdateButton}" 
