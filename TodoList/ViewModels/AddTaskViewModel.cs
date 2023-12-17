@@ -21,13 +21,14 @@ namespace TodoList.ViewModels
     {
         private readonly IFileService _fileService;
         public string SubmitText { get; set; } = "";
-        public string? Title { get; set; }
-        public string? Description { get; set; }
-        public ItemCategory? SelectedCategory => Categories.Single(c => c.IsSelected == true)?.Category;
+        public string Title { get; set; } = "";
+        public string Description { get; set; } = "";
+        private ItemCategory? _selectedCategory;
         public ObservableCollection<CategoryItem> Categories { get; set; } = [];
         public RelayCommand NavigateToTasksCommand { get; set; }
         public AsyncRelayCommand SubmitTaskCommand { get; set; }
         public RelayCommand<ItemCategory> SetCategoryCommand { get; set; }
+        public bool IsSubmitEnabled { get; set; }
         public AddTaskViewModel(ISession session, INavigationService navigationService, IFileService fileService) : base(session, navigationService)
         {
             _fileService = fileService;
@@ -55,11 +56,23 @@ namespace TodoList.ViewModels
 
             return base.OnPageLoaded(ct);
         }
+        protected override void OnPropertyChanged(string? propertyName = null)
+        {
+            base.OnPropertyChanged(propertyName);
+            switch (propertyName)
+            {
+                case nameof(Title):
+                case nameof(Description):
+                    SetIsSubmitEnabled();
+                    break;
 
-
+                default:
+                    break;
+            }
+        }
 
         /// <summary>
-        /// Set a filter
+        /// Set a category
         /// </summary>
         /// <param name="categoryName"></param>
         /// <returns></returns>
@@ -67,6 +80,17 @@ namespace TodoList.ViewModels
         {
             Categories.Where(c => c.IsSelected).ToList().ForEach(c => c.IsSelected = false);
             Categories.Single(c => c.Category == categoryName).IsSelected = true;
+
+            _selectedCategory = categoryName;
+            SetIsSubmitEnabled();
+        }
+
+        /// <summary>
+        /// Condition to enable submit button
+        /// </summary>
+        private void SetIsSubmitEnabled()
+        {
+            IsSubmitEnabled = Title.Length > 0 && Description.Length > 0 && _selectedCategory != null;
         }
 
         /// <summary>
@@ -88,7 +112,7 @@ namespace TodoList.ViewModels
                         Id = items.Count == 0 ? 1 : items.OrderByDescending(x => x.Id).Select(x => x.Id).First() + 1,
                         Title = Title!,
                         Description = Description!,
-                        Category = SelectedCategory!.Value,
+                        Category = _selectedCategory!.Value,
                     });
                 }
                 // if update task
@@ -97,7 +121,7 @@ namespace TodoList.ViewModels
                     Item item = items.Single(i => i.Id ==  Session.SelectedItem.Id);
                     item.Title = Title!;
                     item.Description = Description!;
-                    item.Category = SelectedCategory!.Value;
+                    item.Category = _selectedCategory!.Value;
                 }
 
                 bool result = await _fileService.WriteFile(Constants.DATA_PATH, JsonConvert.SerializeObject(items));
@@ -113,11 +137,18 @@ namespace TodoList.ViewModels
             }
         }
 
+        /// <summary>
+        /// Clear inputs / category on leave page or validate form
+        /// </summary>
         private void ClearInputs()
         {
             Title = string.Empty;
             Description = string.Empty;
+
             Categories.Where(c => c.IsSelected).ToList().ForEach(c => c.IsSelected = false);
+            _selectedCategory = null;
+
+            SetIsSubmitEnabled();
         }
 
         public override void CleanUp()

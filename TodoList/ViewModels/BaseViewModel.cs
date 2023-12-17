@@ -1,11 +1,4 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TodoList.Services;
+﻿using System.ComponentModel;
 using TodoList.Services.Interfaces;
 
 namespace TodoList.ViewModels
@@ -44,7 +37,6 @@ namespace TodoList.ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
         public virtual void CleanUp() { }
     }
 }

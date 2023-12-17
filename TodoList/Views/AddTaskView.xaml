@@ -30,7 +30,7 @@
                 BorderBrush="DarkGray"
                 Padding="4"
                 FontSize="16"
-                Text="{Binding Title}" />
+                Text="{Binding Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             <Separator Background="Transparent" Height="16" />
             <Label 
                 Content="Description"
@@ -40,10 +40,11 @@
                 Width="500"
                 Height="100"
                 TextWrapping="Wrap"
+                AcceptsReturn="True"
                 Padding="4"
                 FontSize="16"
                 VerticalScrollBarVisibility="Visible"
-                Text="{Binding Description}" />
+                Text="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             <Separator Height="20" Background="Transparent"/>
             <Label 
                 Content="Catégorie"
@@ -53,7 +54,7 @@
             <Separator Height="20" Background="Transparent"/>
             <Button 
                 Width="300" 
-                IsEnabled="False"
+                IsEnabled="{Binding IsSubmitEnabled}"
                 Content="{Binding SubmitText}" 
                 Style="{StaticResource SuccessButton}" 
                 Command="{Binding SubmitTaskCommand}" />
