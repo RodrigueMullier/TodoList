@@ -25,7 +25,7 @@ Les utilisateurs peuvent marquer une tâche comme terminée. Cela aide à suivre
 
 ## Captures d'écran
 
-![Ajouter une tâche]((https://i.imgur.com/dlntDyy.png))
+<img src="https://i.imgur.com/dlntDyy.png" alt="Ajouter une tâche" />
 
 ## Prérequis
 
