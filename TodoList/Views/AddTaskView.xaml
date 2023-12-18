@@ -20,12 +20,10 @@
         <StackPanel HorizontalAlignment="Center">
             <Label 
                 Content="Titre"
-                Style="{StaticResource SubTitleLabel}"
-                HorizontalAlignment="Center" />
+                Style="{StaticResource SubTitleLabel}" />
             <TextBox 
                 Width="500" 
                 Height="32"
-                VerticalContentAlignment="Center"
                 BorderThickness="1"
                 BorderBrush="DarkGray"
                 Padding="4"
@@ -34,8 +32,7 @@
             <Separator Background="Transparent" Height="16" />
             <Label 
                 Content="Description"
-                Style="{StaticResource SubTitleLabel}"
-                HorizontalAlignment="Center" />
+                Style="{StaticResource SubTitleLabel}" />
             <TextBox
                 Width="500"
                 Height="100"
@@ -48,8 +45,7 @@
             <Separator Height="20" Background="Transparent"/>
             <Label 
                 Content="Catégorie"
-                Style="{StaticResource SubTitleLabel}"
-                HorizontalAlignment="Center" />
+                Style="{StaticResource SubTitleLabel}" />
             <uc:CategoryUserControl Categories="{Binding Categories}" Command="{Binding SetCategoryCommand}" HorizontalAlignment="Center" />
             <Separator Height="20" Background="Transparent"/>
             <Button 

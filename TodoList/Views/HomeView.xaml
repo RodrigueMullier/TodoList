@@ -11,7 +11,7 @@
 
     <StackPanel VerticalAlignment="Center">
         <Label Content="To-Do List" Style="{StaticResource TitleLabel}" />
-        <Label Content="de Rodrigue MULLIER" Style="{StaticResource SubTitleLabel}" HorizontalContentAlignment="Center" />
+        <Label Content="de Rodrigue MULLIER" Style="{StaticResource SubTitleLabel}" />
         <Separator Height="32" Background="Transparent" />
         <Button 
                 Content="Accéder aux tâches" 

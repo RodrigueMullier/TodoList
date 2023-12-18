@@ -27,7 +27,7 @@
             Command="{Binding NavigateToAddTaskCommand}" />
 
         <StackPanel Grid.Row="1" HorizontalAlignment="Center">
-            <Label Content="Filtrer" Style="{StaticResource SubTitleLabel}" HorizontalAlignment="Center" />
+            <Label Content="Filtrer" Style="{StaticResource SubTitleLabel}" />
             <uc:CategoryUserControl Categories="{Binding Categories}" Command="{Binding FilterCommand}" />
         </StackPanel>
        
