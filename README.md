@@ -2,17 +2,18 @@
 
 ## Description
 
-Cette application Todo List est développée en C# avec l'utilisation du framework WPF (Windows Presentation Foundation). Elle permet de gérer une liste de tâches à faire avec des fonctionnalités d'ajout, de modification, de suppression et de marquage en tant que terminé.
+Cette application Todo List est développée en C# avec l'utilisation du framework WPF (Windows Presentation Foundation). 
+Elle permet de gérer une liste de tâches à faire avec des fonctionnalités d'ajout, de modification, de suppression et de marquage en tant que terminé.
 
 ## Fonctionnalités
 
 ### 1. Ajouter une Tâche
 
-L'application permet d'ajouter une nouvelle tâche à la liste. Chaque tâche est caractérisée par un titre, une description et d'autres informations telles que l'état de terminaison.
+L'application permet d'ajouter une nouvelle tâche à la liste. Chaque tâche est caractérisée par un titre, une description, une catégorie et d'autres informations telles que l'état de terminaison.
 
 ### 2. Modifier une Tâche
 
-Les utilisateurs peuvent modifier les détails d'une tâche existante, tels que son titre, sa description ou son état.
+Les utilisateurs peuvent modifier les détails d'une tâche existante, tels que son titre, sa description ou sa catégorie.
 
 ### 3. Supprimer une Tâche
 
@@ -24,7 +25,7 @@ Les utilisateurs peuvent marquer une tâche comme terminée. Cela aide à suivre
 
 ## Captures d'écran
 
-*Ajoutez vos captures d'écran ici pour illustrer l'apparence et le fonctionnement de votre application.*
+![Ajouter une tâche](https://imgur.com/a/05TC2tk)
 
 ## Prérequis
 
@@ -48,11 +49,3 @@ L'application est accompagnée de tests unitaires pour assurer la fiabilité du 
 3. Committez vos changements : `git commit -m 'Ajout de fonctionnalité incroyable'`.
 4. Poussez vers la branche : `git push origin fonctionnalite-incroyable`.
 5. Ouvrez une demande d'extraction.
-
-## Auteurs
-
-- Votre Nom (@votre-utilisateur)
-
-## Licence
-
-Ce projet est sous licence MIT - voir le fichier [LICENSE](LICENSE) pour plus de détails.
