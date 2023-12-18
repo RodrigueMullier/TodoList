@@ -1,0 +1,99 @@
+﻿<local:BasePage x:Class="TodoList.Views.TasksView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:TodoList.Views"
+      xmlns:uc="clr-namespace:TodoList.Views.UserControls"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" 
+      d:DesignWidth="800"
+      Background="{StaticResource BackgroundColor}"
+      Title="Liste des tâches">
+
+    <Grid Margin="12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="64"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <Button 
+            Grid.Row="0"
+            HorizontalAlignment="Right"
+            Content="Ajouter une tâche" 
+            Width="250" 
+            Style="{StaticResource DefaultButton}"
+            Command="{Binding NavigateToAddTaskCommand}" />
+
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center">
+            <Label Content="Filtrer" Style="{StaticResource SubTitleLabel}" HorizontalAlignment="Center" />
+            <uc:CategoryUserControl Categories="{Binding Categories}" Command="{Binding FilterCommand}" />
+        </StackPanel>
+       
+
+        <ScrollViewer Grid.Row="2">
+            <ItemsControl ItemsSource="{Binding DisplayedItems}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border CornerRadius="4" Background="White" Margin="8">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel Grid.Column="0" Orientation="Vertical" Margin="8" VerticalAlignment="Stretch">
+                                    <TextBlock Text="{Binding Title}" TextWrapping="Wrap" FontWeight="Bold" />
+                                    <TextBlock Text="{Binding Description}" TextWrapping="Wrap" />
+                                    <Separator Background="Transparent" />
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="80" />
+                                            <ColumnDefinition Width="80" />
+                                            <ColumnDefinition Width="80" />
+                                            <ColumnDefinition Width="80" />
+                                            <ColumnDefinition Width="80" />
+                                            <ColumnDefinition Width="80" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock 
+                                            Grid.Column="{Binding Category, Converter={StaticResource ItemCategoryToIntConverter}}"
+                                            Text="{Binding Category}" 
+                                            FontWeight="Bold"
+                                            Foreground="{Binding Category, Converter={StaticResource CategoryToBrushConverter}}" />
+                                    </Grid>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="8">
+                                    <Button Content="Marquer comme terminé" 
+                                            Width="160"
+                                            Style="{StaticResource SuccessButton}" 
+                                            Command="{Binding DataContext.MarkAsFinishedCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:TasksView}}"  
+                                            CommandParameter="{Binding Id}" 
+                                            Visibility="{Binding IsFinished, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=Inverse}"/>
+
+                                    <Button Content="Terminé" 
+                                            Width="160"
+                                            Style="{StaticResource FinishedButton}"
+                                            Visibility="{Binding IsFinished, Converter={StaticResource BoolToVisibilityConverter}}"/>
+
+                                    <Separator Width="12" Background="Transparent"/>
+                                    <Button Content="Modifier" 
+                                            Style="{StaticResource UpdateButton}" 
+                                            Command="{Binding DataContext.UpdateItemCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:TasksView}}"  
+                                            CommandParameter="{Binding Id}" />
+                                    <Separator Width="12" Background="Transparent"/>
+                                    <Button Content="Supprimer" 
+                                            Style="{StaticResource ErrorButton}" 
+                                            Command="{Binding DataContext.DeleteItemCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:TasksView}}"  
+                                            CommandParameter="{Binding Id}" />
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </Grid>
+</local:BasePage>
