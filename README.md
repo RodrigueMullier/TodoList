@@ -25,7 +25,9 @@ Les utilisateurs peuvent marquer une tâche comme terminée. Cela aide à suivre
 
 ## Captures d'écran
 
-<img src="https://i.imgur.com/dlntDyy.png" alt="Ajouter une tâche" />
+<img width="516" height="400" src="https://i.imgur.com/d7cy7Xe.png" alt="Liste des tâches" />
+<img width="516" height="400" src="https://i.imgur.com/PmLYKnh.png" alt="Filter les tâches" />
+<img width="516" height="400" src="https://i.imgur.com/dlntDyy.png" alt="Ajouter une tâche" />
 
 ## Prérequis
 
