@@ -36,7 +36,7 @@ Les utilisateurs peuvent marquer une tâche comme terminée. Cela aide à suivre
 
 ## Installation
 
-1. Clonez ce dépôt : `git clone https://github.com/RodrigueMullier/todo-list-wpf.git`
+1. Clonez ce dépôt : `git clone https://github.com/RodrigueMullier/TodoList.git`
 2. Ouvrez le projet dans Visual Studio.
 3. Compilez et exécutez l'application.
 
